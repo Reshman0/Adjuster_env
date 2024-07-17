@@ -1,4 +1,4 @@
-<!-- employees.blade.php -->
+<!-- resources/views/employees/index.blade.php -->
 
 <h1>Employees List</h1>
 

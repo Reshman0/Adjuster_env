@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainPageCont;
 use App\Http\Controllers\DB_Operations;
 
+
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -19,12 +21,17 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+
 require __DIR__.'/auth.php';
+
+
 Route::get('/deneme', function () { return view('ornek'); });
 Route::get('/mainPage', [MainPageCont::class, 'index']);
-Route::get('/addEmployee', [MainPageCont::class, 'addEmployee'])->name('addEmployee');
 Route::get('/employees', [MainPageCont::class, 'employees'])->name('employees');
-Route::get('/add-employee', function() {return view('addEmployee');})->name('addEmployee');
+Route::get('/addEmployee', [MainPageCont::class, 'addEmployee'])->name('addEmployee');
+Route::get('/employees', [DB_Operations::class, 'getEmployees'])->name('employees.index');
+Route::get('/employees/create', [DB_Operations::class, 'create'])->name('employees.create');
 Route::post('/employees', [DB_Operations::class, 'store'])->name('employees.store');
-Route::get('/employees', [DB_Operations::class, 'index'])->name('employees.index');
-Route::get('/employees', [DB_Operations::class, 'index'])->name('employees.index');
+
+    
+    

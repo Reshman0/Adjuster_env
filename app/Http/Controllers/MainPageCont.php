@@ -15,4 +15,5 @@ class MainPageCont extends Controller
     public function employees(){
         return view('employees');
     }
+
 }

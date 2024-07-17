@@ -1,15 +1,11 @@
-@extends('layouts.app')
-
-@section('content')
-<div class="container">
-    <h2>Yeni Personel Ekleme Formu</h2>
-    <form action="{{ route('employees.store') }}" method="POST">
-        @csrf
-        <label for="name">Adı:</label>
-        <input type="text" id="name" name="name" required><br><br>
-        <label for="position">Pozisyon:</label>
-        <input type="text" id="position" name="position" required><br><br>
-        <button type="submit">Ekle</button>
-    </form>
-</div>
-@endsection
+<form method="POST" action="{{ route('employees.store') }}">
+    @csrf
+    <input type="text" name="name" placeholder="Name">
+    <input type="text" name="surname" placeholder="Surname">
+    <input type="text" name="sicil" placeholder="Sicil">
+    <input type="text" name="organization_unit" placeholder="Organization Unit">
+    <input type="text" name="phone_num" placeholder="Phone Number">
+    <input type="text" name="e_mail" placeholder="Email">
+    <input type="text" name="duty" placeholder="Duty">
+    <button type="submit">Add Employee</button>
+</form>

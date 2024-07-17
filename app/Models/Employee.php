@@ -11,7 +11,7 @@ class Employee extends Model
     protected $table = 'employees'; // Tablo adını belirtin
 
     protected $primaryKey = 'employee_id'; // Birincil anahtar sütununu belirtin
-
+    public $timestamps = false; // Eğer tabloda timestamps sütunları yoksa
     protected $fillable = [
         'name',
         'surname',
@@ -21,4 +21,6 @@ class Employee extends Model
         'e_mail',
         'duty',
     ];
+
+
 }
