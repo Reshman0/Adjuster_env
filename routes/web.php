@@ -32,6 +32,8 @@ Route::get('/addEmployee', [MainPageCont::class, 'addEmployee'])->name('addEmplo
 Route::get('/employees', [DB_Operations::class, 'getEmployees'])->name('employees.index');
 Route::get('/employees/create', [DB_Operations::class, 'create'])->name('employees.create');
 Route::post('/employees', [DB_Operations::class, 'store'])->name('employees.store');
-
+Route::get('/employees', [DB_Operations::class, 'index'])->name('employees');
+Route::get('/employees/create', [DB_Operations::class, 'create'])->name('addEmployee');
+Route::post('/employees', [DB_Operations::class, 'store'])->name('employees.store');
     
     

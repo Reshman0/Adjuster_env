@@ -7,7 +7,17 @@ use App\Models\Employee;
 use DB;
 class DB_Operations extends Controller
 {
-    
+    public function index()
+    {
+        $employees = Employee::all();
+        return view('employees.index', compact('employees'));
+    }
+
+    public function create()
+    {
+        return view('addEmployee');
+    }
+
     public function getEmployees()
     {
         $employees = Employee::all();
@@ -28,7 +38,7 @@ class DB_Operations extends Controller
 
     $employee->save();
 
-    return redirect()->route('employees.index')->with('success', 'Employee added successfully.');
+    return redirect()->route('employees')->with('success', 'Employee added successfully.');
 }
    
 }
