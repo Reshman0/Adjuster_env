@@ -32,5 +32,9 @@
             @endforeach
         </tbody>
     </table>
+    <a href="{{ route('createOrganization') }}" class="btn btn-primary">Organizasyon Ekle</a>
+    <br>
+    <button><a href="{{ route('home') }}" class="btn btn-primary">Ana Sayfaya Dön</a></button>
+
 </body>
 </html>

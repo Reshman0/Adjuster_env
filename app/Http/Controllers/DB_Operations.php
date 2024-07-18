@@ -65,7 +65,7 @@ public function storeOrganization(Request $request)
     $organization->upper_organization = $request->upper_organization;
     $organization->save();
 
-    return redirect()->route('createOrganization')->with('success', 'Organization added successfully!');
+    return redirect()->route('organizations.index')->with('success', 'Organization added successfully!');
 }
 public function indexOrganization()
 {

@@ -27,6 +27,7 @@ require __DIR__.'/auth.php';
 
 Route::get('/deneme', function () { return view('ornek'); });
 Route::get('/mainPage', [MainPageCont::class, 'index']);
+Route::get('/mainPage', [MainPageCont::class, 'index'])->name('home');
 Route::get('/employees', [MainPageCont::class, 'employees'])->name('employees');
 Route::get('/addEmployee', [MainPageCont::class, 'addEmployee'])->name('addEmployee');
 Route::get('/employees', [DB_Operations::class, 'getEmployees'])->name('employees.index');
