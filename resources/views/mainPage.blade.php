@@ -25,7 +25,8 @@
     </div>
     <div id="organizasyonlar" class="card">
         <h2>Organizasyonlar</h2>
-        <button>+ Ekle</button>
+        <button><a href="{{ route('organizations.index') }}" class="btn btn-primary">Organizasyon Listesi</a></button>
+        <button><a href="{{ route('createOrganization') }}" class="btn btn-primary">+ Ekle</a></button>
     </div>
     <div id="sirketler" class="card">
         <h2>Şirketler</h2>

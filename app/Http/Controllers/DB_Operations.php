@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Employee;
 use DB;
+use App\Models\Organization;
 class DB_Operations extends Controller
 {
     public function index()
@@ -40,5 +41,38 @@ class DB_Operations extends Controller
 
     return redirect()->route('employees')->with('success', 'Employee added successfully.');
 }
+public function createOrganization()
+{
+    $organizations = Organization::all();
+    return view('createOrganization', compact('organizations'));
+}
+
+public function storeOrganization(Request $request)
+{
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'adress' => 'required|string|max:255',
+        'phone_num' => 'required|numeric',
+        'e_mail' => 'required|email',
+        'upper_organization' => 'nullable|integer|exists:organization,organization_id',
+    ]);
+
+    $organization = new Organization();
+    $organization->name = $request->name;
+    $organization->adress = $request->adress;
+    $organization->phone_num = $request->phone_num;
+    $organization->e_mail = $request->e_mail;
+    $organization->upper_organization = $request->upper_organization;
+    $organization->save();
+
+    return redirect()->route('createOrganization')->with('success', 'Organization added successfully!');
+}
+public function indexOrganization()
+{
+    $organizations = Organization::all();
+    return view('indexOrganization', compact('organizations'));
+}
+
+
    
 }

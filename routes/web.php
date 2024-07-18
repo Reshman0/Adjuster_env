@@ -35,5 +35,9 @@ Route::post('/employees', [DB_Operations::class, 'store'])->name('employees.stor
 Route::get('/employees', [DB_Operations::class, 'index'])->name('employees');
 Route::get('/employees/create', [DB_Operations::class, 'create'])->name('addEmployee');
 Route::post('/employees', [DB_Operations::class, 'store'])->name('employees.store');
-    
+// routes/web.php
+Route::get('/organizations/create', [DB_Operations::class, 'createOrganization'])->name('createOrganization');
+Route::post('/organizations/store', [DB_Operations::class, 'storeOrganization'])->name('storeOrganization');
+Route::get('/organizations', [DB_Operations::class, 'indexOrganization'])->name('organizations.index');
+
     
