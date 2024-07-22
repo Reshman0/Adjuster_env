@@ -30,7 +30,8 @@
     </div>
     <div id="sirketler" class="card">
         <h2>Şirketler</h2>
-        <button>+ Ekle</button>
+        <button><a href="{{ route('companies.index') }}" class="btn btn-primary">Şirketler Listesi</a></button>
+        <button><a href="{{ route('companies.create') }}" class="btn btn-primary">+ Ekle</a></button>
     </div>
     <div id="sozlesmeler" class="card">
         <h2>Sözleşmeler</h2>

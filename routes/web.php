@@ -40,5 +40,9 @@ Route::post('/employees', [DB_Operations::class, 'store'])->name('employees.stor
 Route::get('/organizations/create', [DB_Operations::class, 'createOrganization'])->name('createOrganization');
 Route::post('/organizations/store', [DB_Operations::class, 'storeOrganization'])->name('storeOrganization');
 Route::get('/organizations', [DB_Operations::class, 'indexOrganization'])->name('organizations.index');
+Route::get('/employees/create', [DB_Operations::class, 'createEmployee'])->name('createEmployee');
+Route::post('/employees/store', [DB_Operations::class, 'storeEmployee'])->name('storeEmployee');
 
-    
+Route::get('/companies', [DB_Operations::class, 'indexCompany'])->name('companies.index');
+Route::get('/companies/create', [DB_Operations::class, 'createCompany'])->name('companies.create');
+Route::post('/companies/store', [DB_Operations::class, 'storeCompany'])->name('companies.store');

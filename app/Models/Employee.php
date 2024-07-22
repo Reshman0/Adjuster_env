@@ -21,6 +21,9 @@ class Employee extends Model
         'e_mail',
         'duty',
     ];
-
+    public function organization()
+    {
+        return $this->belongsTo(Organization::class, 'organization_unit', 'organization_id');
+    }
 
 }

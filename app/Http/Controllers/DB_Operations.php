@@ -6,12 +6,14 @@ use Illuminate\Http\Request;
 use App\Models\Employee;
 use DB;
 use App\Models\Organization;
+use App\Models\Company;
 class DB_Operations extends Controller
 {
     public function index()
     {
-        $employees = Employee::all();
-        return view('employees.index', compact('employees'));
+        $employees = Employee::with('organization')->get();
+        return view('employees.index', compact('employees'));//$employees = Employee::all();
+        //return view('employees.index', compact('employees'));
     }
 
     public function create()
@@ -72,7 +74,57 @@ public function indexOrganization()
     $organizations = Organization::all();
     return view('indexOrganization', compact('organizations'));
 }
+public function createEmployee()
+{
+    $organizations = Organization::all();
+    return view('addEmployee', compact('organizations'));
+}
+public function storeEmployee(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'surname' => 'required|string|max:255',
+            'sicil' => 'required|integer',
+            'organization_unit' => 'required|integer|exists:organization,organization_id',
+            'phone_num' => 'required|numeric',
+            'e_mail' => 'required|email',
+            'duty' => 'required|string|max:255',
+        ]);
 
+        Employee::create($request->all());
 
-   
+        return redirect()->route('employees')->with('success', 'Employee added successfully.');
+    }
+
+    public function createCompany()
+    {
+        return view('createCompany');
+    }
+
+    // Yeni bir şirketi kaydetme
+    public function storeCompany(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'adress' => 'required|string|max:255',
+            'phone_num' => 'required|numeric',
+            'e_mail' => 'required|email',
+        ]);
+
+        $company = new Company();
+        $company->name = $request->name;
+        $company->adress = $request->adress;
+        $company->phone_num = $request->phone_num;
+        $company->e_mail = $request->e_mail;
+        $company->save();
+
+        return redirect()->route('companies.index')->with('success', 'Company added successfully!');
+    }
+
+    // Şirketleri listeleme
+    public function indexCompany()
+    {
+        $companies = Company::all();
+        return view('indexCompany', compact('companies'));
+    }
 }
