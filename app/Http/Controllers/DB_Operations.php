@@ -77,6 +77,7 @@ public function indexOrganization()
 public function createEmployee()
 {
     $organizations = Organization::all();
+    dd($organizations);
     return view('addEmployee', compact('organizations'));
 }
 public function storeEmployee(Request $request)

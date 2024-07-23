@@ -35,7 +35,8 @@
     </div>
     <div id="sozlesmeler" class="card">
         <h2>Sözleşmeler</h2>
-        <button>+ Ekle</button>
+        <button><a href="{{ route('contracts.index') }}" class="btn btn-primary">Sözleşmeler Listesi</a></button>
+        <button><a href="{{ route('contracts.create') }}" class="btn btn-primary">+ Ekle</a></button>
     </div>
     <div id="envanter-turleri" class="card">
         <h2>Envanter Türleri</h2>

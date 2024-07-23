@@ -17,4 +17,5 @@ class Company extends Model
         'phone_num',
         'e_mail',
     ];
+    
 }

@@ -4,7 +4,8 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainPageCont;
 use App\Http\Controllers\DB_Operations;
-
+use App\Http\Controllers\ContractController;
+use App\Http\Controllers\Contract;
 
 
 Route::get('/', function () {
@@ -13,16 +14,16 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+})->name('dashboard');
 
 
-require __DIR__.'/auth.php';
+Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+
+
+//require __DIR__.'/auth.php';
 
 
 Route::get('/deneme', function () { return view('ornek'); });
@@ -46,3 +47,7 @@ Route::post('/employees/store', [DB_Operations::class, 'storeEmployee'])->name('
 Route::get('/companies', [DB_Operations::class, 'indexCompany'])->name('companies.index');
 Route::get('/companies/create', [DB_Operations::class, 'createCompany'])->name('companies.create');
 Route::post('/companies/store', [DB_Operations::class, 'storeCompany'])->name('companies.store');
+
+Route::get('/contracts', [ContractController::class, 'index'])->name('contracts.index');
+Route::get('/contracts/create', [ContractController::class, 'create'])->name('contracts.create');
+Route::post('/contracts', [ContractController::class, 'store'])->name('contracts.store');

@@ -17,14 +17,15 @@
         <input type="text" id="surname" name="surname" required><br>
 
         <label for="sicil">Sicil:</label>
-        <input type="number" id="sicil" name="sicil" required><br>
+<input type="number" id="sicil" name="sicil" required><br>
 
-        <label for="organization_unit">Organizasyon Birimi:</label>
-        <select id="organization_unit" name="organization_unit" required>
-            @foreach($organizations as $organization)
-                <option value="{{ $organization->organization_id }}">{{ $organization->name }}</option>
-            @endforeach
-        </select><br>
+<label for="organization_unit">Organizasyon Birimi:</label>
+<select id="organization_unit" name="organization_unit" required>
+    @foreach($organizations as $organization)
+        <option value="{{ $organization->organization_id }}">{{ $organization->name }}</option>
+    @endforeach
+</select><br>
+
 
         <label for="phone_num">Telefon Numarası:</label>
         <input type="text" id="phone_num" name="phone_num" required><br>
