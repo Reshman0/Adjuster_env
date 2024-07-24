@@ -25,6 +25,7 @@ class Contract extends Model
     ];
     public function vendor()
     {
-        return $this->belongsTo(Vendor::class, 'contract_vendor');
+        return $this->belongsTo(Company::class, 'contract_vendor');
     }
+    
 }

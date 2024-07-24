@@ -24,7 +24,7 @@
             @foreach ($contracts as $contract)
                 <tr>
                     <td>{{ $contract->contract_id }}</td>
-                    <td>{{ $contract->contract_vendor }}</td>
+                    <td>{{ $contract->vendor ? $contract->vendor->name : 'N/A' }}</td> <!-- Vendor ismi burada gösteriliyor -->
                     <td>{{ $contract->start_date->format('Y-m-d') }}</td>
                     <td>{{ $contract->end_date ? $contract->end_date->format('Y-m-d') : 'N/A' }}</td>
                     <td><a href="{{ asset('storage/' . $contract->contract_doc) }}" target="_blank">View Document</a></td>
