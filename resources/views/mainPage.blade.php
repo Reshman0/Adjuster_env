@@ -40,7 +40,8 @@
     </div>
     <div id="envanter-turleri" class="card">
         <h2>Envanter Türleri</h2>
-        <button>+ Ekle</button>
+        <button><a href="{{ route('types.index') }}" class="btn btn-primary">Envanter Türleri Listesi</a></button>
+        <button><a href="{{ route('types.create') }}" class="btn btn-primary">+ Ekle</a></button></button>
     </div>
     <div id="markalar" class="card">
         <h2>Markalar</h2>
