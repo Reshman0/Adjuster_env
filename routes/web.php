@@ -7,7 +7,7 @@ use App\Http\Controllers\DB_Operations;
 use App\Http\Controllers\ContractController;
 use App\Http\Controllers\Contract;
 use App\Http\Controllers\TypeController;
-
+use App\Http\Controllers\BrandController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -56,3 +56,6 @@ Route::post('/contracts', [ContractController::class, 'store'])->name('contracts
 Route::get('/types', [TypeController::class, 'index'])->name('types.index');
 Route::get('/types/create', [TypeController::class, 'create'])->name('types.create');
 Route::post('/types', [TypeController::class, 'store'])->name('types.store');
+
+Route::resource('brands', BrandController::class);
+Route::resource('brands', BrandController::class);
