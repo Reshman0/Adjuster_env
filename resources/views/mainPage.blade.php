@@ -45,11 +45,13 @@
     </div>
     <div id="markalar" class="card">
         <h2>Markalar</h2>
-        <button>+ Ekle</button>
+        <button><a href="{{ route('brands.index') }}" class="btn btn-primary">Markalar Listesi</a></button>
+        <button><a href="{{ route('brands.create') }}" class="btn btn-primary">+ Ekle</a></button>
     </div>
     <div id="olaylar" class="card">
         <h2>Olaylar</h2>
-        <button>+ Ekle</button>
+        <button><a href="{{ route('incidents.index') }}" class="btn btn-primary">Olaylar Listesi</a></button>
+        <button><a href="{{ route('incidents.create') }}" class="btn btn-primary">+ Ekle</a></button>
     </div>
     <div id="alt-turler" class="card">
         <h2>Alt Türler</h2>

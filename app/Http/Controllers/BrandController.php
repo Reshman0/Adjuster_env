@@ -7,19 +7,31 @@ use Illuminate\Http\Request;
 use App\Models\Company;
 class BrandController extends Controller
 {
-    public function edit($id)
+    
+    public function update(Request $request, $id)
 {
-    // Belirli bir brand_id ile marka bulunur
-    $brand = Brand::find($id);
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'company_id' => 'required|integer|exists:companies,id',
+    ]);
 
-    // Eğer marka bulunamazsa, 404 sayfasına yönlendirilir
-    if (!$brand) {
-        abort(404);
-    }
+    $brand = Brand::findOrFail($id);
+    $brand->name = $request->name;
+    $brand->company_id = $request->company_id;
+    $brand->save();
 
-    // Edit view dosyasına ilgili marka bilgileri ile geri dönüş yapılır
-    return view('brands.edit', compact('brand'));
+    return redirect()->route('brands.index')->with('success', 'Marka başarıyla güncellendi.');
 }
+
+
+public function edit($id)
+{
+    $brand = Brand::find($id);
+    $companies = Company::all(); // Tüm şirketleri alın
+
+    return view('brands.edit', compact('brand', 'companies'));
+}
+
     public function destroy($id)
 {
     // İlgili marka kaydını bulun

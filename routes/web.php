@@ -8,6 +8,7 @@ use App\Http\Controllers\ContractController;
 use App\Http\Controllers\Contract;
 use App\Http\Controllers\TypeController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\IncidentController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -59,3 +60,9 @@ Route::post('/types', [TypeController::class, 'store'])->name('types.store');
 
 Route::resource('brands', BrandController::class);
 Route::resource('brands', BrandController::class);
+Route::get('/brands/edit/{id}', [BrandController::class, 'edit'])->name('brands.edit');
+Route::put('/brands/{id}', [BrandController::class, 'update'])->name('brands.update');
+
+Route::get('/incidents/create', [IncidentController::class, 'create'])->name('incidents.create');
+Route::post('/incidents', [IncidentController::class, 'store'])->name('incidents.store');
+Route::resource('incidents', IncidentController::class);
