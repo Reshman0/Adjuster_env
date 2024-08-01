@@ -12,6 +12,23 @@ class BrandController extends Controller
 {
     $request->validate([
         'name' => 'required|string|max:255',
+        'company_id' => 'required|integer',
+    ]);
+
+    // Belirtilen ID'ye sahip markayı bulun ve güncelleyin
+    $brand = Brand::findOrFail($id);
+    $brand->update([
+        'name' => $request->name,
+        'company_id' => $request->company_id,
+    ]);
+
+    // Güncelleme başarılı olduğunda kullanıcıyı geri yönlendirin
+    return redirect()->route('brands.index')->with('success', 'Marka başarıyla güncellendi.');
+}
+    /*public function update(Request $request, $id)
+{
+    $request->validate([
+        'name' => 'required|string|max:255',
         'company_id' => 'required|integer|exists:companies,id',
     ]);
 
@@ -21,16 +38,24 @@ class BrandController extends Controller
     $brand->save();
 
     return redirect()->route('brands.index')->with('success', 'Marka başarıyla güncellendi.');
-}
+}*/
 
 
 public function edit($id)
+{
+    // Verilen ID ile markayı bul
+    $brand = Brand::findOrFail($id);
+    $companies = Company::all();
+    // Verileri view'e aktar
+    return view('brands.edit', compact('brand', 'companies'));
+}
+/*public function edit($id)
 {
     $brand = Brand::find($id);
     $companies = Company::all(); // Tüm şirketleri alın
 
     return view('brands.edit', compact('brand', 'companies'));
-}
+}*/
 
     public function destroy($id)
 {

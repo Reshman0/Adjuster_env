@@ -22,4 +22,9 @@ class Type extends Model
 
     // Timestamps kullanmak istemiyorsanız bu satırı ekleyin
     public $timestamps = false;
+    
+    public function subTypes()
+{
+    return $this->hasMany(SubType::class, 'upper_type_id', 'type_id');
+}
 }

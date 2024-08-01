@@ -5,6 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Marka Düzenle</title>
     <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 20px; }
+        .container { max-width: 600px; margin: 0 auto; background: #fff; padding: 20px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
+        h1 { text-align: center; }
+        form { display: flex; flex-direction: column; }
+        label { margin: 10px 0 5px; }
+        input { padding: 10px; margin-bottom: 10px; }
+        button { padding: 10px; background-color: #28a745; color: white; border: none; cursor: pointer; }
+        button:hover { background-color: #218838; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Marka Düzenle</h1>
+        <form action="{{ url('brands/' . $brand->brand_id) }}" method="POST">
+            @csrf
+            @method('PUT')
+
+            <label for="name">Marka Adı:</label>
+            <input type="text" name="name" id="name" value="{{ $brand->name }}" required>
+
+            <label for="company_id">Şirket ID:</label>
+            <input type="number" name="company_id" id="company_id" value="{{ $brand->company_id }}" required>
+
+            <button type="submit">Güncelle</button>
+        </form>
+    </div>
+</body>
+</html>
+<!--
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marka Düzenle</title>
+    <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #f7f7f7;
@@ -83,3 +119,4 @@
     </div>
 </body>
 </html>
+-->

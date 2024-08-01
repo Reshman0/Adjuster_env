@@ -55,7 +55,8 @@
     </div>
     <div id="alt-turler" class="card">
         <h2>Alt Türler</h2>
-        <button>+ Ekle</button>
+        <button><a href="{{ route('sub_types.index') }}" class="btn btn-primary">Alt Türler Listesi</a></button>
+        <button><a href="{{ route('sub_types.create') }}" class="btn btn-primary">+ Ekle</a></button>
     </div>
     <div id="modeller" class="card">
         <h2>Modeller</h2>
