@@ -60,7 +60,8 @@
     </div>
     <div id="modeller" class="card">
         <h2>Modeller</h2>
-        <button>+ Ekle</button>
+        <button><a href="{{ route('models.index') }}" class="btn btn-primary">Modeller Listesi</a></button>
+        <button><a href="{{ route('models.create') }}" class="btn btn-primary">+ Ekle</a></button>
     </div>
 </div>
 </body>

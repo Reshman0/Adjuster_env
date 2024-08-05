@@ -25,9 +25,15 @@
             <label for="name">Marka Adı:</label>
             <input type="text" name="name" id="name" value="{{ $brand->name }}" required>
 
-            <label for="company_id">Şirket ID:</label>
-            <input type="number" name="company_id" id="company_id" value="{{ $brand->company_id }}" required>
-
+            <label for="company_id">Şirket:</label>
+            <select name="company_id" id="company_id" required>
+            @foreach($companies as $company)
+                <option value="{{ $company->id }}" {{ $company->id == $brand->company_id ? 'selected' : '' }}>
+                {{ $company->name }}
+                </option>
+            @endforeach
+            </select>
+            <br>
             <button type="submit">Güncelle</button>
         </form>
     </div>

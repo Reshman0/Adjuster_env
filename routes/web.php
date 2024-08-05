@@ -10,6 +10,7 @@ use App\Http\Controllers\TypeController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\IncidentController;
 use App\Http\Controllers\SubTypeController;
+use App\Http\Controllers\ModelController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -25,8 +26,6 @@ Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.up
 Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
 
-
-//require __DIR__.'/auth.php';
 
 
 Route::get('/deneme', function () { return view('ornek'); });
@@ -59,11 +58,9 @@ Route::get('/types', [TypeController::class, 'index'])->name('types.index');
 Route::get('/types/create', [TypeController::class, 'create'])->name('types.create');
 Route::post('/types', [TypeController::class, 'store'])->name('types.store');
 
-Route::resource('brands', BrandController::class);
+
 Route::resource('brands', BrandController::class);
 Route::get('/brands/edit/{id}', [BrandController::class, 'edit'])->name('brands.edit');
-Route::put('/brands/{id}', [BrandController::class, 'update'])->name('brands.update');
-Route::get('brands/{id}/edit', [BrandController::class, 'edit'])->name('brands.edit');
 Route::put('brands/{id}', [BrandController::class, 'update'])->name('brands.update');
 
 Route::get('/incidents/create', [IncidentController::class, 'create'])->name('incidents.create');
@@ -74,3 +71,5 @@ Route::resource('incidents', IncidentController::class);
 Route::resource('sub_types', SubTypeController::class);
 Route::get('sub_types/{id}/edit', [SubTypeController::class, 'edit'])->name('sub_types.edit');
 Route::put('sub_types/{id}', [SubTypeController::class, 'update'])->name('sub_types.update');
+
+Route::resource('models', ModelController::class);
