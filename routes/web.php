@@ -11,6 +11,7 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\IncidentController;
 use App\Http\Controllers\SubTypeController;
 use App\Http\Controllers\ModelController;
+use App\Http\Controllers\InventoryController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -73,3 +74,5 @@ Route::get('sub_types/{id}/edit', [SubTypeController::class, 'edit'])->name('sub
 Route::put('sub_types/{id}', [SubTypeController::class, 'update'])->name('sub_types.update');
 
 Route::resource('models', ModelController::class);
+
+Route::resource('inventory', InventoryController::class);
