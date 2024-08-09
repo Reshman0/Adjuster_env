@@ -25,5 +25,9 @@ class Employee extends Model
     {
         return $this->belongsTo(Organization::class, 'organization_unit', 'organization_id');
     }
+    public function inventory()
+    {
+        return $this->hasMany(Inventory::class, 'employee_id', 'employee_id');
+    }
 
 }

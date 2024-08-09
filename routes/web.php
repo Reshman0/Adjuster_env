@@ -61,8 +61,9 @@ Route::post('/types', [TypeController::class, 'store'])->name('types.store');
 
 
 Route::resource('brands', BrandController::class);
-Route::get('/brands/edit/{id}', [BrandController::class, 'edit'])->name('brands.edit');
-Route::put('brands/{id}', [BrandController::class, 'update'])->name('brands.update');
+// Route::get('/brands/edit/{id}', [BrandController::class, 'edit'])->name('brands.edit');
+// Route::put('brands/{id}', [BrandController::class, 'update'])->name('brands.update');
+
 
 Route::get('/incidents/create', [IncidentController::class, 'create'])->name('incidents.create');
 Route::post('/incidents', [IncidentController::class, 'store'])->name('incidents.store');
@@ -70,8 +71,8 @@ Route::resource('incidents', IncidentController::class);
 
 
 Route::resource('sub_types', SubTypeController::class);
-Route::get('sub_types/{id}/edit', [SubTypeController::class, 'edit'])->name('sub_types.edit');
-Route::put('sub_types/{id}', [SubTypeController::class, 'update'])->name('sub_types.update');
+// Route::get('sub_types/{id}/edit', [SubTypeController::class, 'edit'])->name('sub_types.edit');
+// Route::put('sub_types/{id}', [SubTypeController::class, 'update'])->name('sub_types.update');
 
 Route::resource('models', ModelController::class);
 

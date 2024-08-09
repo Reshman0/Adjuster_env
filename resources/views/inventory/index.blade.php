@@ -60,7 +60,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($inventory as $inventory1)
+            @foreach ($inventories as $inventory1)
             <tr>
                 <td>{{ $inventory1->inventory_id }}</td>
                 <td>{{ $inventory1->name }}</td>

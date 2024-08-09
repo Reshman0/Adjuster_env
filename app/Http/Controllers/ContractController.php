@@ -47,4 +47,5 @@ class ContractController extends Controller
 
     return redirect('/contracts')->with('success', 'Contract saved!');
 }
+
 }

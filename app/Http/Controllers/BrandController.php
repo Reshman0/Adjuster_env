@@ -10,10 +10,12 @@ class BrandController extends Controller
     
     public function update(Request $request, $id)
     {
+        //dd($request->all());
         $request->validate([
             'name' => 'required|string|max:255',
             'company_id' => 'required|integer',
         ]);
+        
 
         // Belirtilen ID'ye sahip markayı bulun ve güncelleyin
         $brand = Brand::findOrFail($id);
@@ -28,6 +30,7 @@ class BrandController extends Controller
 
 public function edit($id)
 {
+
     $brand = Brand::findOrFail($id);
     $companies = Company::all();
 

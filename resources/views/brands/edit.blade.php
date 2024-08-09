@@ -18,7 +18,7 @@
 <body>
     <div class="container">
         <h1>Marka Düzenle</h1>
-        <form action="{{ url('brands/' . $brand->brand_id) }}" method="POST">
+        <form action="{{ route('brands.update', $brand->brand_id) }}" method="POST">
             @csrf
             @method('PUT')
 
@@ -26,9 +26,9 @@
             <input type="text" name="name" id="name" value="{{ $brand->name }}" required>
 
             <label for="company_id">Şirket:</label>
-            <select name="company_id" id="company_id" required>
+            <select name="company_id" id="company_id" >
             @foreach($companies as $company)
-                <option value="{{ $company->id }}" {{ $company->id == $brand->company_id ? 'selected' : '' }}>
+                <option value="{{ $company->company_id }}" {{ $company->company_id == $brand->company_id ? 'selected' : '' }}>
                 {{ $company->name }}
                 </option>
             @endforeach

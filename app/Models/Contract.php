@@ -27,5 +27,9 @@ class Contract extends Model
     {
         return $this->belongsTo(Company::class, 'contract_vendor');
     }
+    public function inventories()
+    {
+        return $this->hasMany(Inventory::class, 'contract_id');
+    }
     
 }

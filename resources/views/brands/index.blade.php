@@ -12,30 +12,31 @@
         <a href="{{ url('/brands/create') }}" class="btn btn-primary mb-3">Add New Brand</a>
         <table class="table table-bordered">
             <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Company ID</th>
-                    <th>Actions</th>
-                </tr>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Company Name</th>
+                <th>Actions</th>
+            </tr>
             </thead>
             <tbody>
-                @foreach($brands as $brand)
-                <tr>
-                    <td>{{ $brand->brand_id }}</td>
-                    <td>{{ $brand->name }}</td>
-                    <td>{{ $brand->company_id }}</td>
-                    <td>
-                        <a href="{{ url('/brands/edit/' . $brand->brand_id) }}" class="btn btn-warning btn-sm">Edit</a>
-                        <form action="{{ url('/brands/' . $brand->brand_id) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                        </form>
-                    </td>
-                </tr>
-                @endforeach
+            @foreach($brands as $brand)
+            <tr>
+                <td>{{ $brand->brand_id }}</td>
+                <td>{{ $brand->name }}</td>
+                <td>{{ $brand->company->name }}</td>
+                <td>
+                <a href="{{ route('brands.edit' , $brand->brand_id) }}" class="btn btn-warning btn-sm">Edit</a>
+                <form action="{{ url('/brands/' . $brand->brand_id) }}" method="POST" style="display:inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                </form>
+                </td>
+            </tr>
+            @endforeach
             </tbody>
+        </table>
         </table>
     </div>
 </body>
