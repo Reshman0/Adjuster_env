@@ -65,18 +65,16 @@
     <label for="attribute">Özellik:</label>
     <input type="text" name="attribute" id="attribute" value="{{ old('attribute', $inventory->attribute ?? '') }}"><br>
 
-    <label for="vendor">Üretici:</label>
+    <label for="producer">Üretici:</label>
+    <select name="producer" id="producer" required>
+        @foreach($companies as $company)
+            <option value="{{ $company->id }}" {{ old('producer', $inventory->producer ?? '') == $company->id ? 'selected' : '' }}>{{ $company->name }}</option>
+        @endforeach
+    </select><br>
+    <label for="vendor">Tedarikçi:</label>
     <select name="vendor" id="vendor" required>
         @foreach($companies as $company)
             <option value="{{ $company->id }}" {{ old('vendor', $inventory->vendor ?? '') == $company->id ? 'selected' : '' }}>{{ $company->name }}</option>
-        @endforeach
-        <!-- <option value="1">21313</option> -->
-    </select><br>
-
-    <label for="supplier">Tedarikçi:</label>
-    <select name="supplier" id="supplier" required>
-        @foreach($companies as $company)
-            <option value="{{ $company->id }}" {{ old('supplier', $inventory->supplier ?? '') == $company->id ? 'selected' : '' }}>{{ $company->name }}</option>
         @endforeach
     </select><br>
 
@@ -132,9 +130,9 @@
 
     <label for="status">Durum:</label>
     <select name="status" id="status" required>
-        <option value="0" {{ old('status', $inventory->status ?? '') == '0' ? 'selected' : '' }}>depoda</option>
-        <option value="1" {{ old('status', $inventory->status ?? '') == '1' ? 'selected' : '' }}>kullanımda</option>
-        <option value="2" {{ old('status', $inventory->status ?? '') == '2' ? 'selected' : '' }}>bekelemede</option>
+        <option value="0" {{ old('status', $inventory->status ?? '') == '0' ? 'selected' : '' }}>Depoda</option>
+        <option value="1" {{ old('status', $inventory->status ?? '') == '1' ? 'selected' : '' }}>Kullanımda</option>
+        <option value="2" {{ old('status', $inventory->status ?? '') == '2' ? 'selected' : '' }}>Beklemede</option>
     </select><br>
 
     <label for="type_id">Tür:</label>
@@ -153,6 +151,7 @@
 
     <button type="submit">{{ isset($inventory) ? 'Güncelle' : 'Oluştur' }}</button>
 </form>
+
 
 </body>
 </html>
