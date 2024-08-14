@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
 class Inventory extends Model
 {
     use HasFactory;
@@ -39,9 +38,30 @@ class Inventory extends Model
     ];
 
     // İlişkiler
+
+    public function producer()
+    {
+        return $this->belongsTo(Company::class, 'producer');
+    }
+    public function vendor()
+    {
+        return $this->belongsTo(Company::class, 'vendor');
+    }
+    public function owner()
+    {
+        return $this->belongsTo(Employee::class, 'product_owner_id');
+    }
+    public function organization()
+    {
+        return $this->belongsTo(Organization::class, 'product_organization_id');
+    }
+    public function contract()
+    {
+        return $this->belongsTo(Contract::class, 'contract_id');
+    }
     public function brand()
     {
-        return $this->belongsTo(BrandM::class, 'brand');
+        return $this->belongsTo(Brand::class, 'brand');
     }
 
     public function model()

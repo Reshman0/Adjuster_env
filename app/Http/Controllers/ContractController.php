@@ -33,6 +33,7 @@ class ContractController extends Controller
     $path = $request->file('contract_doc')->store('contracts', 'public');
     
     // Tarih formatlamalarını kontrol edin ve uygun formata çevirin
+    
     $startDate = Carbon::createFromFormat('Y-m-d', $request->get('start_date'));
     $endDate = $request->get('end_date') ? Carbon::createFromFormat('Y-m-d', $request->get('end_date')) : null;
 

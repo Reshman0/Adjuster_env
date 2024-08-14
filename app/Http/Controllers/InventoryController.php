@@ -11,33 +11,29 @@ use App\Models\Type;
 use App\Models\SubType;
 use App\Models\Employee;
 use App\Models\Company;
+use Carbon\Carbon;
 
 class InventoryController extends Controller
 {
     public function index()
-    {
-        $inventories = Inventory::all();
-        return view('inventory.index', compact('inventories'));
-    }
+{
+    // İlişkili tablolardan veri çekerken eager loading kullanmak
+    $inventories = Inventory::with(['producer', 'vendor', 'brand', 'model', 'type', 'sub_type'])->get();
 
-    public function create()
-    {
-        $brands = Brand::all();
-        $models = ModelM::all();
-        $companies = Company::all();
-        $contracts = Contract::all();
-        $owners = Employee::all();
-        $organizations = Organization::all();
-        $types = Type::all();
-        $sub_types = SubType::all();
+    // Verileri view'a göndermek
+    return view('inventory.index', compact('inventories'));
+}
 
-        return view('inventory.create', compact('brands', 'models', 'companies','contracts', 'owners', 'organizations', 'types', 'sub_types'));
-    }
+    // public function index()
+    // {
+    //     $inventories = Inventory::all();
+    //     return view('inventory.index', compact('inventories'));
+    // }
 
     public function store(Request $request)
     {
         $request->validate([
-            'serial_num' => 'required|string|max:255',
+            'serial_num' => 'required|int',
             'name' => 'required|string|max:255',
             // 'attribute' => 'nullable|integer', // 'attribute' integer olarak ayarlanmış
             // 'producer' => 'nullable|integer', // 'producer' integer olarak ayarlanmış
@@ -49,6 +45,7 @@ class InventoryController extends Controller
             // 'warranty_end_date' => 'nullable|date',
             // 'maintenance_start_date' => 'nullable|date',
             // 'maintenance_end_date' => 'nullable|date',
+            // 'maintenance_contract_id' => 'nullable|integer', // 'maintenance_contract_id' integer olarak ayarlanmış 
             // 'accounting_registration_date' => 'nullable|date',
             // 'product_owner_id' => 'nullable|integer',
             // 'product_organization_id' => 'nullable|integer',
@@ -58,8 +55,12 @@ class InventoryController extends Controller
             // 'sub_type' => 'required|integer', // 'sub_type' integer olarak ayarlanmış
         ]);
         
-         dd($request->all()); // Form gönderildi mi?
+        //dd($request->all()); // Form gönderildi mi?
         //dd($request -> input('brand_id'));
+        //dd($request -> input('producer'));
+        //fix the date format
+        $purchase_date = Carbon::createFromFormat('Y-m-d', $request->input('purchase_date'));
+        //dd($request->all());
         $inventory = Inventory::create([
             'serial_num' => $request->input('serial_num'),
             'name' => $request->input('name'),
@@ -68,20 +69,37 @@ class InventoryController extends Controller
             'vendor' => $request->input('vendor'),
             'brand' => $request->input('brand_id'), // 'brand_id' yerine 'brand' olarak düzeltilmiş
             'model' => $request->input('model_id'), // 'model_id' yerine 'model' olarak düzeltilmiş
-            'purchase_date' => $request->input('purchase_date'),
+            'purchase_date' => $purchase_date,
             'contract_id' => $request->input('contract_id'),
             'warranty_end_date' => $request->input('warranty_end_date'),
             'maintenance_start_date' => $request->input('maintenance_start_date'),
             'maintenance_end_date' => $request->input('maintenance_end_date'),
+            'maintenance_contract_id' => $request->input('maintenance_contract_id'),
             'accounting_registration_date' => $request->input('accounting_registration_date'),
             'product_owner_id' => $request->input('product_owner_id'),
             'product_organization_id' => $request->input('product_organization_id'),
             'status' => $request->input('status'),
             'critical_degree' => $request->input('critical_degree'),
-            'type_id' => $request->input('type_id'), // 'type_id' yerine 'type' olarak düzeltilmiş
-            'sub_type_id' => $request->input('sub_type_id'), // 'sub_type_id' yerine 'sub_type' olarak düzeltilmiş
+            'type' => $request->input('type_id'), // 'type_id' yerine 'type' olarak düzeltilmiş
+            'sub_type' => $request->input('sub_type_id'), // 'sub_type_id' yerine 'sub_type' olarak düzeltilmiş
+
         ]);
+        
     }
+    public function create()
+    {
+        $brands = Brand::all();
+        $models = ModelM::all();
+        $companies = Company::all();
+        $contracts = Contract::all();
+        $owners = Employee::all();
+        $organizations = Organization::all();
+        $types = Type::all();
+        $sub_types = SubType::all();
+        return view('inventory.create', compact('brands', 'models', 'companies','contracts', 'owners', 'organizations', 'types', 'sub_types'));
+    }
+
+    
     
 
     public function edit($id)
@@ -89,9 +107,10 @@ class InventoryController extends Controller
         $inventory = Inventory::findOrFail($id);
         $brands = Brand::all();
         $models = ModelM::all();
+        $companies = Company::all();
         $contracts = Contract::all();
-        $maintenance_contracts = MaintenanceContract::all();
-        $owners = Owner::all();
+        $maintenance_contracts = Contract::all();
+        $owners = Employee::all();
         $organizations = Organization::all();
         $types = Type::all();
         $sub_types = SubType::all();

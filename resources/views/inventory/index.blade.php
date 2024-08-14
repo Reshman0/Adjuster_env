@@ -50,6 +50,7 @@
     <table>
         <thead>
             <tr>
+
                 <th>ID</th>
                 <th>İsim</th>
                 <th>Marka</th>
@@ -60,22 +61,22 @@
             </tr>
         </thead>
         <tbody>
+            
             @foreach ($inventories as $inventory1)
             <tr>
                 <td>{{ $inventory1->inventory_id }}</td>
                 <td>{{ $inventory1->name }}</td>
-                <td>{{ $inventory1->brand->name }}</td>
-                <td>{{ $inventory1->model->name }}</td>
-                <td>{{ $inventory1->type->type_name }}</td>
-                <td>{{ $inventory1->sub_type->sub_type_name }}</td>
+                <td>{{ $inventory1->brand }}</td>
+                <td>{{ $inventory1->model }}</td>
+                <td>{{ $inventory1->type }}</td>
+                <td>{{ $inventory1->sub_type }}</td>
                 <td>
-                    <a href="{{ route('inventory.edit', $inventory->inventory_id) }}">Düzenle</a>
-                    <form action="{{ route('inventory.destroy', $inventory->inventory_id) }}" method="POST" style="display:inline;">
+                    <a href="{{ route('inventory.edit', $inventory1->inventory_id) }}" class="button">Düzenle</a>
+                    <form action="{{ route('inventory.destroy', $inventory1->inventory_id) }}" method="POST" style="display: inline-block;">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" onclick="return confirm('Silmek istediğinize emin misiniz?')">Sil</button>
+                        <button type="submit" class="button" onclick="return confirm('Silmek istediğinize emin misiniz?')">Sil</button>
                     </form>
-                </td>
             </tr>
             @endforeach
         </tbody>
