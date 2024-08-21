@@ -115,7 +115,7 @@ class InventoryController extends Controller
         $types = Type::all();
         $sub_types = SubType::all();
 
-        return view('inventory.edit', compact('inventory', 'brands', 'models', 'contracts', 'maintenance_contracts', 'owners', 'organizations', 'types', 'sub_types'));
+        return view('inventory.edit', compact('inventory','companies', 'brands', 'models', 'contracts', 'maintenance_contracts', 'owners', 'organizations', 'types', 'sub_types'));
     }
 
     public function update(Request $request, $id)
@@ -124,8 +124,8 @@ class InventoryController extends Controller
         'serial_num' => 'required|string|max:255',
         'name' => 'required|string|max:255',
         'attribute' => 'nullable|string|max:255',
-        'producer' => 'required|integer',  // Üretici artık bir integer olarak geliyor.
-        'vendor' => 'required|integer',  // Tedarikçi artık integer tipinde.
+        'producer' => 'required|integer',
+        'vendor' => 'required|integer',
         'brand_id' => 'required|integer',
         'model_id' => 'required|integer',
         'purchase_date' => 'required|date',
@@ -133,6 +133,7 @@ class InventoryController extends Controller
         'warranty_end_date' => 'nullable|date',
         'maintenance_start_date' => 'nullable|date',
         'maintenance_end_date' => 'nullable|date',
+        'maintenance_contract_id' => 'nullable|integer',
         'accounting_registration_date' => 'nullable|date',
         'product_owner_id' => 'nullable|integer',
         'product_organization_id' => 'nullable|integer',
@@ -146,27 +147,29 @@ class InventoryController extends Controller
     $inventory->update([
         'serial_num' => $request->input('serial_num'),
         'name' => $request->input('name'),
-        'attribute' => $request->input('attribute'),
+        'attribute' => $request->input('attribute') ?? null,
         'producer' => $request->input('producer'),
         'vendor' => $request->input('vendor'),
-        'brand' => $request->input('brand_id'),
-        'model' => $request->input('model_id'),
+        'brand' => $request->input('brand_id'), // 'brand_id' yerine 'brand'
+        'model' => $request->input('model_id'), // 'model_id' yerine 'model'
         'purchase_date' => $request->input('purchase_date'),
-        'contract_id' => $request->input('contract_id'),
-        'warranty_end_date' => $request->input('warranty_end_date'),
-        'maintenance_start_date' => $request->input('maintenance_start_date'),
-        'maintenance_end_date' => $request->input('maintenance_end_date'),
-        'accounting_registration_date' => $request->input('accounting_registration_date'),
-        'product_owner_id' => $request->input('product_owner_id'),
-        'product_organization_id' => $request->input('product_organization_id'),
+        'contract_id' => $request->input('contract_id') ?? null,
+        'warranty_end_date' => $request->input('warranty_end_date') ?? null,
+        'maintenance_start_date' => $request->input('maintenance_start_date') ?? null,
+        'maintenance_end_date' => $request->input('maintenance_end_date') ?? null,
+        'maintenance_contract_id' => $request->input('maintenance_contract_id') ?? null,
+        'accounting_registration_date' => $request->input('accounting_registration_date') ?? null,
+        'product_owner_id' => $request->input('product_owner_id') ?? null,
+        'product_organization_id' => $request->input('product_organization_id') ?? null,
         'status' => $request->input('status'),
-        'critical_degree' => $request->input('critical_degree'),
-        'type_id' => $request->input('type_id'),
-        'sub_type_id' => $request->input('sub_type_id'),
+        'critical_degree' => $request->input('critical_degree') ?? null,
+        'type' => $request->input('type_id'), // 'type_id' yerine 'type'
+        'sub_type' => $request->input('sub_type_id'), // 'sub_type_id' yerine 'sub_type'
     ]);
 
     return redirect()->route('inventory.index')->with('success', 'Inventory başarıyla güncellendi.');
 }
+
 
 
     public function destroy($id)
